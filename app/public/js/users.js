@@ -34,7 +34,7 @@ const usrsModule = (() => {
       const body = {
         name: name,
         profile: profile,
-        dateOfBirth: dateOfBirth
+        date_of_birth: dateOfBirth
       }
 
       const res = await fetch(BASE_URL, {
