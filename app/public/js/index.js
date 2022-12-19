@@ -19,6 +19,22 @@ const indexModule = (() => {
         return window.location.href = '/'
       })
       break;
+    
+    case '/edit.html':
+      const uid = window.location.search.split('?uid=')[1]
+
+
+      document.getElementsById('save-btn').addEventListener('click', () => {
+        return usersModule.saveUser(uid)
+      })
+      document.getElementsById('cancel-btn').addEventListener('click', () => {
+        return window.location.href = '/'
+      })
+      document.getElementsById('delete-btn').addEventListener('click', () => {
+        return usersModule.deleteUser(uid)
+      })
+
+      return usersModule.setExistingValue(uid)
 
     default:
       break;
