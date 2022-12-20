@@ -6,6 +6,36 @@ const usrsModule = (() => {
   const headers = new Headers()
   headers.set("Content-Type", "application/json")
 
+  const handleUser = async (res) => {
+    const resJson = await res.json
+
+    switch (res.status) {
+      case 200:
+        alert(resJson.message)
+        window.location.href = "/"
+        break;
+      case 201:
+        alert(resJson.message)
+        window.location.href = "/"
+        break;
+      case 400:
+        //リクエストのパラメータ間違い
+        alert(resJson.error)
+        break;
+      case 404:
+        // 指定したリソースが見当たらない
+        alert(resJson.error) 
+        break;
+      case 500:
+        // サーバ内部エラー
+        alert(uesJson.error)
+        break;
+      default:
+        alert("何らかのエラーが発生しました")
+    }
+
+  }
+
   return {
     fetchAllUsers: async () => {
       const res = await fetch(BASE_URL)
@@ -45,10 +75,8 @@ const usrsModule = (() => {
         body: JSON.stringify(body)
       })
 
-      const resJson = await res.json
+      return handleError(res)
 
-      alert(resJson.message)
-      window.location.href = "/"
     },
     // ユーザ編集
     setExistingValue: async (uid) => {
@@ -77,10 +105,8 @@ const usrsModule = (() => {
         body: JSON.stringify(body)
       })
 
-      const resJson = await res.json
+      return handleError(res)
 
-      alert(resJson.message)
-      window.location.href = "/"
     },
     // ユーザ削除
     deleteUser: async (uid) =>{
@@ -94,11 +120,7 @@ const usrsModule = (() => {
           headers: headers,
         })
 
-        const resJson = await res.json()
-        
-        alert(resJson.message)
-        window.location.href = '/'
-    
+        return handleError(res)
       }
     }
   }
